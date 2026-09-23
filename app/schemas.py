@@ -63,3 +63,45 @@ class ResultResponse(BaseModel):
     created_at: datetime
 
     model_config = ConfigDict(from_attributes=True)
+
+
+# ---------- Auth / Login Schemas ----------
+
+class UserLogin(BaseModel):
+    email: EmailStr
+    password: str
+
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+# ---------- Quiz Submission Schemas ----------
+
+class AnswerSubmit(BaseModel):
+    question_id: int
+    user_answer: str
+
+
+class QuizSubmit(BaseModel):
+    answers: list[AnswerSubmit]
+
+
+class QuizSubmitResponse(BaseModel):
+    score: int
+    total_questions: int
+    message: str
+
+class QuizQuestionResponse(BaseModel):
+    id: int
+    title: str
+    category: str
+    difficulty: str
+    created_at: datetime
+
+    model_config = ConfigDict(from_attributes=True)
+
+class DashboardResponse(BaseModel):
+    total_attempts: int
+    best_score: int
+    average_score: float
